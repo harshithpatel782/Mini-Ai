@@ -1,0 +1,262 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090b14">
+
+  <title>Memory | MINI-AI</title>
+
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+
+  <style>
+    .memory-container {
+      width: min(850px, 92%);
+      margin: 45px auto;
+    }
+
+    .memory-header {
+      margin-bottom: 28px;
+    }
+
+    .memory-panel {
+      padding: 24px;
+      margin-bottom: 20px;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 16px;
+      background: rgba(255,255,255,0.04);
+    }
+
+    .memory-panel label {
+      display: block;
+      margin: 14px 0 8px;
+    }
+
+    .memory-panel input,
+    .memory-panel textarea {
+      width: 100%;
+      padding: 13px;
+      border-radius: 10px;
+    }
+
+    .memory-panel textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .memory-panel button {
+      margin-top: 15px;
+      padding: 11px 18px;
+      border: 0;
+      border-radius: 9px;
+      cursor: pointer;
+    }
+
+    .memory-item {
+      padding: 15px;
+      margin-top: 12px;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      overflow-wrap: anywhere;
+    }
+
+    .memory-item p {
+      white-space: pre-wrap;
+    }
+
+    .memory-item button {
+      margin-right: 8px;
+    }
+
+    .memory-status {
+      margin-top: 15px;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="topbar">
+    <a class="brand" href="dashboard.html">
+      <span class="brand-mark">M</span>
+      <span>MINI-AI</span>
+    </a>
+
+    <a href="dashboard.html">Dashboard</a>
+  </header>
+
+  <main class="memory-container">
+
+    <section class="memory-header">
+      <p class="eyebrow">PERSONAL KNOWLEDGE</p>
+      <h1>MINI-AI Memory</h1>
+      <p>Save useful information and manage your local memory.</p>
+    </section>
+
+    <section class="memory-panel">
+
+      <h2>Save a Memory</h2>
+
+      <form id="memory-form">
+
+        <label for="memory-title">Title</label>
+
+        <input
+          type="text"
+          id="memory-title"
+          maxlength="100"
+          placeholder="Example: My learning goals"
+          required
+        >
+
+        <label for="memory-content">Information</label>
+
+        <textarea
+          id="memory-content"
+          maxlength="3000"
+          placeholder="Write information you want to save..."
+          required
+        ></textarea>
+
+        <button type="submit">Save Memory</button>
+
+      </form>
+
+    </section>
+
+    <section class="memory-panel">
+
+      <h2>Saved Memories</h2>
+
+      <div id="memory-list">
+        <p>No memories saved yet.</p>
+      </div>
+
+      <p
+        id="memory-status"
+        class="memory-status"
+        role="status"
+        aria-live="polite"
+      >
+        Memories are stored in this browser on this device.
+      </p>
+
+    </section>
+
+  </main>
+
+  <script>
+    const STORAGE_KEY = "mini-ai-memories-v1";
+
+    const form = document.getElementById("memory-form");
+    const titleInput = document.getElementById("memory-title");
+    const contentInput = document.getElementById("memory-content");
+    const memoryList = document.getElementById("memory-list");
+    const status = document.getElementById("memory-status");
+
+    function loadMemories() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        const memories = saved ? JSON.parse(saved) : [];
+
+        return Array.isArray(memories) ? memories : [];
+      } catch (error) {
+        status.textContent = "Could not read saved memories.";
+        return [];
+      }
+    }
+
+    function saveMemories(memories) {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(memories));
+        return true;
+      } catch (error) {
+        status.textContent =
+          "Storage is unavailable or full. Memory was not saved.";
+        return false;
+      }
+    }
+
+    function renderMemories() {
+      const memories = loadMemories();
+      memoryList.replaceChildren();
+
+      if (memories.length === 0) {
+        const empty = document.createElement("p");
+        empty.textContent = "No memories saved yet.";
+        memoryList.appendChild(empty);
+        return;
+      }
+
+      memories.forEach((memory) => {
+        const item = document.createElement("article");
+        item.className = "memory-item";
+
+        const heading = document.createElement("h3");
+        heading.textContent = memory.title;
+
+        const content = document.createElement("p");
+        content.textContent = memory.content;
+
+        const date = document.createElement("small");
+        date.textContent = memory.date;
+
+        const deleteButton = document.createElement("button");
+        deleteButton.type = "button";
+        deleteButton.textContent = "Delete";
+
+        deleteButton.addEventListener("click", () => {
+          const updated = loadMemories().filter(
+            (entry) => entry.id !== memory.id
+          );
+
+          if (saveMemories(updated)) {
+            renderMemories();
+            status.textContent = "Memory deleted.";
+          }
+        });
+
+        item.append(heading, content, date, deleteButton);
+        memoryList.appendChild(item);
+      });
+    }
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const title = titleInput.value.trim();
+      const content = contentInput.value.trim();
+
+      if (!title || !content) {
+        status.textContent = "Enter both a title and information.";
+        return;
+      }
+
+      const memories = loadMemories();
+
+      memories.unshift({
+        id: crypto.randomUUID
+          ? crypto.randomUUID()
+          : String(Date.now()) + Math.random(),
+        title,
+        content,
+        date: new Date().toLocaleString()
+      });
+
+      if (saveMemories(memories)) {
+        form.reset();
+        renderMemories();
+        status.textContent = "Memory saved on this device.";
+      }
+    });
+
+    renderMemories();
+  </script>
+
+</body>
+</html>
+

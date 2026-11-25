@@ -1,0 +1,202 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090b14">
+
+  <title>Coding | MINI-AI</title>
+
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+
+  <style>
+    .coding-container {
+      width: min(1000px, 94%);
+      margin: 40px auto;
+    }
+
+    .coding-header {
+      margin-bottom: 25px;
+    }
+
+    .coding-panel {
+      padding: 22px;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 16px;
+      background: rgba(255,255,255,0.04);
+    }
+
+    .coding-panel label {
+      display: block;
+      margin: 16px 0 8px;
+    }
+
+    .coding-panel select,
+    .coding-panel textarea {
+      width: 100%;
+      padding: 13px;
+      border-radius: 10px;
+    }
+
+    .code-editor {
+      min-height: 300px;
+      resize: vertical;
+      font-family: monospace;
+      font-size: 14px;
+      line-height: 1.6;
+      tab-size: 2;
+    }
+
+    .coding-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .coding-actions button {
+      padding: 12px 18px;
+      border: 0;
+      border-radius: 9px;
+      cursor: pointer;
+    }
+
+    .coding-status {
+      margin-top: 18px;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="topbar">
+    <a class="brand" href="dashboard.html">
+      <span class="brand-mark">M</span>
+      <span>MINI-AI</span>
+    </a>
+
+    <a href="dashboard.html">Dashboard</a>
+  </header>
+
+  <main class="coding-container">
+
+    <section class="coding-header">
+      <p class="eyebrow">DEVELOPMENT WORKSPACE</p>
+      <h1>MINI-AI Coding</h1>
+      <p>Write code, prepare debugging requests and work on programming ideas.</p>
+    </section>
+
+    <section class="coding-panel">
+
+      <label for="programming-language">Programming Language</label>
+
+      <select id="programming-language">
+        <option value="Python">Python</option>
+        <option value="JavaScript">JavaScript</option>
+        <option value="HTML">HTML</option>
+        <option value="CSS">CSS</option>
+        <option value="Java">Java</option>
+        <option value="C">C</option>
+        <option value="C++">C++</option>
+        <option value="Other">Other</option>
+      </select>
+
+      <label for="code-editor">Your Code</label>
+
+      <textarea
+        id="code-editor"
+        class="code-editor"
+        placeholder="// Write or paste your code here..."
+        spellcheck="false"
+        autocapitalize="off"
+        autocomplete="off"
+      ></textarea>
+
+      <label for="coding-request">What should MINI-AI do?</label>
+
+      <textarea
+        id="coding-request"
+        rows="3"
+        placeholder="Example: Find the error and explain how to fix it."
+      ></textarea>
+
+      <div class="coding-actions">
+
+        <button type="button" id="copy-code">
+          Copy Code
+        </button>
+
+        <button type="button" id="clear-code">
+          Clear Editor
+        </button>
+
+        <button type="button" id="analyze-code">
+          Prepare Analysis
+        </button>
+
+      </div>
+
+      <p
+        id="coding-status"
+        class="coding-status"
+        role="status"
+        aria-live="polite"
+      >
+        Coding workspace ready. AI code analysis will be available
+        after connecting the local AI engine.
+      </p>
+
+    </section>
+
+  </main>
+
+  <script>
+    const editor = document.getElementById("code-editor");
+    const request = document.getElementById("coding-request");
+    const language = document.getElementById("programming-language");
+    const status = document.getElementById("coding-status");
+
+    document.getElementById("copy-code").addEventListener("click", async () => {
+      if (!editor.value) {
+        status.textContent = "There is no code to copy.";
+        return;
+      }
+
+      try {
+        await navigator.clipboard.writeText(editor.value);
+        status.textContent = "Code copied successfully.";
+      } catch (error) {
+        status.textContent =
+          "Clipboard access failed. Select the code and copy it manually.";
+      }
+    });
+
+    document.getElementById("clear-code").addEventListener("click", () => {
+      editor.value = "";
+      request.value = "";
+      status.textContent = "Coding editor cleared.";
+    });
+
+    document.getElementById("analyze-code").addEventListener("click", () => {
+      if (!editor.value.trim()) {
+        status.textContent = "Write or paste some code first.";
+        return;
+      }
+
+      const selectedLanguage = language.value;
+      const instruction = request.value.trim() || "Review this code.";
+
+      status.textContent =
+        `Analysis request prepared for ${selectedLanguage}. ` +
+        `Instruction: ${instruction} ` +
+        "Connect the local AI engine to receive an analysis.";
+    });
+  </script>
+
+</body>
+</html>
+

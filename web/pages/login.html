@@ -1,1 +1,103 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090b14">
+
+  <title>Login | MINI-AI</title>
+
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link rel="stylesheet" href="../css/login.css">
+
+  <script src="../js/auth.js" defer></script>
+</head>
+
+<body class="auth-page">
+
+  <main class="auth-container">
+
+    <section class="auth-card">
+
+      <header class="auth-header">
+        <div class="auth-logo" aria-hidden="true">M</div>
+
+        <h1>Welcome Back</h1>
+        <p>Sign in to continue to MINI-AI</p>
+      </header>
+
+      <form id="login-form" class="auth-form">
+
+        <div class="form-group">
+          <label for="login-email">Email Address</label>
+
+          <input
+            type="email"
+            id="login-email"
+            name="email"
+            placeholder="Enter your email"
+            autocomplete="email"
+            required
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="login-password">Password</label>
+
+          <input
+            type="password"
+            id="login-password"
+            name="password"
+            placeholder="Enter your password"
+            autocomplete="current-password"
+            minlength="8"
+            required
+          >
+        </div>
+
+        <div class="auth-options">
+          <label class="remember-option">
+            <input type="checkbox" id="remember-me">
+            <span>Remember me</span>
+          </label>
+
+          <a href="forgot-password.html">
+            Forgot password?
+          </a>
+        </div>
+
+        <p
+          id="login-error"
+          class="auth-message"
+          role="alert"
+          aria-live="polite"
+        ></p>
+
+        <button type="submit" id="login-button">
+          Sign In
+        </button>
+
+      </form>
+
+      <div class="auth-divider">
+        <span>OR</span>
+      </div>
+
+      <p class="auth-footer">
+        Don't have an account?
+        <a href="signup.html">Create Account</a>
+      </p>
+
+      <a class="back-link" href="../index.html">
+        Back to MINI-AI
+      </a>
+
+    </section>
+
+  </main>
+
+</body>
+</html>
+

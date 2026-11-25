@@ -1,0 +1,215 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090b14">
+
+  <title>Files | MINI-AI</title>
+
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+
+  <style>
+    .files-container {
+      width: min(900px, 92%);
+      margin: 45px auto;
+    }
+
+    .files-header {
+      margin-bottom: 28px;
+    }
+
+    .files-panel {
+      padding: 24px;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 16px;
+      background: rgba(255,255,255,0.04);
+    }
+
+    .file-picker {
+      display: block;
+      padding: 30px 18px;
+      border: 2px dashed rgba(255,255,255,0.25);
+      border-radius: 12px;
+      text-align: center;
+    }
+
+    .file-picker input {
+      display: block;
+      max-width: 100%;
+      margin: 18px auto 0;
+    }
+
+    .file-list {
+      margin-top: 24px;
+    }
+
+    .file-item {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 14px;
+      margin-top: 10px;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+    }
+
+    .file-name {
+      overflow-wrap: anywhere;
+    }
+
+    .file-size {
+      opacity: 0.7;
+    }
+
+    .files-status {
+      margin-top: 18px;
+      line-height: 1.5;
+    }
+
+    .clear-button {
+      margin-top: 18px;
+      padding: 11px 18px;
+      border: 0;
+      border-radius: 9px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="topbar">
+    <a class="brand" href="dashboard.html">
+      <span class="brand-mark">M</span>
+      <span>MINI-AI</span>
+    </a>
+
+    <a href="dashboard.html">Dashboard</a>
+  </header>
+
+  <main class="files-container">
+
+    <section class="files-header">
+      <p class="eyebrow">PERSONAL FILE WORKSPACE</p>
+      <h1>MINI-AI Files</h1>
+      <p>Select files from your device to view them in this workspace.</p>
+    </section>
+
+    <section class="files-panel">
+
+      <label class="file-picker" for="file-input">
+        <strong>Select Files</strong>
+        <br>
+        <small>Choose one or more files from your device.</small>
+
+        <input
+          type="file"
+          id="file-input"
+          multiple
+        >
+      </label>
+
+      <div class="file-list" id="file-list">
+        <h2>Selected Files</h2>
+        <p>No files selected yet.</p>
+      </div>
+
+      <button
+        type="button"
+        class="clear-button"
+        id="clear-files"
+      >
+        Clear Selection
+      </button>
+
+      <p
+        id="files-status"
+        class="files-status"
+        role="status"
+        aria-live="polite"
+      >
+        Selected files remain in this page session. Persistent storage
+        and AI file analysis are not connected yet.
+      </p>
+
+    </section>
+
+  </main>
+
+  <script>
+    const fileInput = document.getElementById("file-input");
+    const fileList = document.getElementById("file-list");
+    const filesStatus = document.getElementById("files-status");
+    const clearButton = document.getElementById("clear-files");
+
+    function formatSize(bytes) {
+      if (bytes < 1024) return bytes + " B";
+
+      if (bytes < 1024 * 1024) {
+        return (bytes / 1024).toFixed(1) + " KB";
+      }
+
+      return (bytes / (1024 * 1024)).toFixed(2) + " MB";
+    }
+
+    fileInput.addEventListener("change", () => {
+      const files = Array.from(fileInput.files);
+
+      fileList.replaceChildren();
+
+      const heading = document.createElement("h2");
+      heading.textContent = "Selected Files";
+      fileList.appendChild(heading);
+
+      if (files.length === 0) {
+        const emptyMessage = document.createElement("p");
+        emptyMessage.textContent = "No files selected yet.";
+        fileList.appendChild(emptyMessage);
+        filesStatus.textContent = "No files selected.";
+        return;
+      }
+
+      files.forEach((file) => {
+        const item = document.createElement("div");
+        item.className = "file-item";
+
+        const name = document.createElement("span");
+        name.className = "file-name";
+        name.textContent = file.name;
+
+        const size = document.createElement("span");
+        size.className = "file-size";
+        size.textContent = formatSize(file.size);
+
+        item.append(name, size);
+        fileList.appendChild(item);
+      });
+
+      filesStatus.textContent =
+        files.length + " file(s) selected. They have not been uploaded.";
+    });
+
+    clearButton.addEventListener("click", () => {
+      fileInput.value = "";
+
+      fileList.replaceChildren();
+
+      const heading = document.createElement("h2");
+      heading.textContent = "Selected Files";
+
+      const emptyMessage = document.createElement("p");
+      emptyMessage.textContent = "No files selected yet.";
+
+      fileList.append(heading, emptyMessage);
+      filesStatus.textContent = "File selection cleared.";
+    });
+  </script>
+
+</body>
+</html>
+

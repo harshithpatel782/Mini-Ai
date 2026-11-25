@@ -1,0 +1,211 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090b14">
+
+  <title>Study | MINI-AI</title>
+
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+
+  <style>
+    .study-container {
+      width: min(900px, 92%);
+      margin: 45px auto;
+    }
+
+    .study-header {
+      margin-bottom: 28px;
+    }
+
+    .study-header h1 {
+      margin-bottom: 10px;
+    }
+
+    .study-panel {
+      padding: 24px;
+      margin-bottom: 22px;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 16px;
+      background: rgba(255,255,255,0.04);
+    }
+
+    .study-panel label {
+      display: block;
+      margin: 15px 0 8px;
+    }
+
+    .study-panel input,
+    .study-panel select,
+    .study-panel textarea {
+      width: 100%;
+      padding: 13px;
+      border-radius: 10px;
+    }
+
+    .study-panel textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .study-panel button {
+      margin-top: 16px;
+      padding: 12px 20px;
+      border: 0;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .study-status {
+      margin-top: 14px;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="topbar">
+    <a class="brand" href="dashboard.html">
+      <span class="brand-mark">M</span>
+      <span>MINI-AI</span>
+    </a>
+
+    <a href="dashboard.html">Dashboard</a>
+  </header>
+
+  <main class="study-container">
+
+    <section class="study-header">
+      <p class="eyebrow">PERSONAL LEARNING SPACE</p>
+      <h1>MINI-AI Study</h1>
+      <p>Learn concepts, prepare for exams and practise questions.</p>
+    </section>
+
+    <section class="study-panel">
+
+      <h2>Learn a Topic</h2>
+
+      <form id="learn-form">
+
+        <label for="study-subject">Subject</label>
+
+        <select id="study-subject" required>
+          <option value="">Choose a subject</option>
+          <option value="Mathematics">Mathematics</option>
+          <option value="Science">Science</option>
+          <option value="Social Studies">Social Studies</option>
+          <option value="English">English</option>
+          <option value="Computer Science">Computer Science</option>
+          <option value="General Knowledge">General Knowledge</option>
+          <option value="Other">Other</option>
+        </select>
+
+        <label for="study-topic">Topic</label>
+
+        <input
+          id="study-topic"
+          type="text"
+          placeholder="Example: Photosynthesis"
+          maxlength="200"
+          required
+        >
+
+        <label for="study-level">Explanation Level</label>
+
+        <select id="study-level">
+          <option value="Simple">Simple explanation</option>
+          <option value="Detailed">Detailed explanation</option>
+          <option value="Exam preparation">Exam preparation</option>
+        </select>
+
+        <button type="submit">Learn Topic</button>
+
+      </form>
+
+    </section>
+
+    <section class="study-panel">
+
+      <h2>Practice Questions</h2>
+
+      <form id="practice-form">
+
+        <label for="practice-subject">Subject</label>
+
+        <input
+          id="practice-subject"
+          type="text"
+          placeholder="Enter a subject"
+          maxlength="100"
+          required
+        >
+
+        <label for="practice-topic">Topic</label>
+
+        <input
+          id="practice-topic"
+          type="text"
+          placeholder="Enter a topic"
+          maxlength="200"
+          required
+        >
+
+        <button type="submit">Create Practice Questions</button>
+
+      </form>
+
+    </section>
+
+    <section class="study-panel">
+
+      <h2>Study Request</h2>
+
+      <p
+        id="study-status"
+        class="study-status"
+        role="status"
+        aria-live="polite"
+      >
+        Your study workspace is ready. Connect the local AI engine
+        to generate explanations and practice questions.
+      </p>
+
+    </section>
+
+  </main>
+
+  <script>
+    const studyStatus = document.getElementById("study-status");
+
+    document.getElementById("learn-form").addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const subject = document.getElementById("study-subject").value;
+      const topic = document.getElementById("study-topic").value.trim();
+      const level = document.getElementById("study-level").value;
+
+      studyStatus.textContent =
+        `Study request prepared: ${subject} — ${topic}. Level: ${level}. ` +
+        "Connect the local AI engine to generate the lesson.";
+    });
+
+    document.getElementById("practice-form").addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const subject = document.getElementById("practice-subject").value.trim();
+      const topic = document.getElementById("practice-topic").value.trim();
+
+      studyStatus.textContent =
+        `Practice request prepared for ${subject}: ${topic}. ` +
+        "Connect the local AI engine to generate questions.";
+    });
+  </script>
+
+</body>
+</html>
+

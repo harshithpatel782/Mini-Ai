@@ -1,0 +1,201 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090b14">
+
+  <title>Dashboard | MINI-AI</title>
+
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="../css/animations.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+</head>
+
+<body class="dashboard-page">
+
+  <header class="topbar">
+    <a class="brand" href="dashboard.html">
+      <span class="brand-mark">M</span>
+      <span>MINI-AI</span>
+    </a>
+
+    <button
+      class="menu-button"
+      id="menu-button"
+      type="button"
+      aria-label="Open navigation"
+      aria-expanded="false"
+    >
+      ☰
+    </button>
+
+    <div class="topbar-actions">
+      <span class="status-indicator">Local-first assistant</span>
+      <a class="profile-link" href="settings.html">Settings</a>
+    </div>
+  </header>
+
+  <div class="dashboard-layout">
+
+    <aside class="sidebar" id="sidebar">
+      <nav aria-label="Main navigation">
+
+        <a class="nav-link active" href="dashboard.html">
+          <span>⌂</span> Dashboard
+        </a>
+
+        <a class="nav-link" href="chat.html">
+          <span>◉</span> AI Chat
+        </a>
+
+        <a class="nav-link" href="vision.html">
+          <span>◎</span> Vision
+        </a>
+
+        <a class="nav-link" href="voice.html">
+          <span>◖</span> Voice Assistant
+        </a>
+
+        <a class="nav-link" href="study.html">
+          <span>▤</span> Study
+        </a>
+
+        <a class="nav-link" href="coding.html">
+          <span>⌘</span> Coding
+        </a>
+
+        <a class="nav-link" href="files.html">
+          <span>▱</span> Files
+        </a>
+
+        <a class="nav-link" href="memory.html">
+          <span>◈</span> Memory
+        </a>
+
+        <a class="nav-link" href="settings.html">
+          <span>⚙</span> Settings
+        </a>
+
+      </nav>
+
+      <div class="sidebar-footer">
+        <p>MINI-AI</p>
+        <small>Intelligence Without Limits</small>
+      </div>
+    </aside>
+
+    <main class="dashboard-main">
+
+      <section class="welcome-section">
+        <p class="eyebrow">PERSONAL AI WORKSPACE</p>
+
+        <h1>Welcome to MINI-AI</h1>
+
+        <p>
+          Your personal assistant for learning, creating,
+          exploring and getting things done.
+        </p>
+      </section>
+
+      <section class="assistant-panel">
+        <div>
+          <p class="eyebrow">YOUR ASSISTANT</p>
+          <h2>What can I help you with?</h2>
+          <p>
+            Start a conversation or choose a tool below.
+          </p>
+        </div>
+
+        <a class="primary-button" href="chat.html">
+          Start a Chat
+        </a>
+      </section>
+
+      <section class="tools-section">
+        <div class="section-heading">
+          <h2>Explore Features</h2>
+          <p>Choose a MINI-AI tool.</p>
+        </div>
+
+        <div class="feature-grid">
+
+          <a class="feature-card" href="chat.html">
+            <span class="feature-icon">◉</span>
+            <h3>AI Chat</h3>
+            <p>Ask questions and explore ideas.</p>
+          </a>
+
+          <a class="feature-card" href="vision.html">
+            <span class="feature-icon">◎</span>
+            <h3>Vision</h3>
+            <p>Work with images and visual information.</p>
+          </a>
+
+          <a class="feature-card" href="voice.html">
+            <span class="feature-icon">◖</span>
+            <h3>Voice Assistant</h3>
+            <p>Interact using your voice.</p>
+          </a>
+
+          <a class="feature-card" href="study.html">
+            <span class="feature-icon">▤</span>
+            <h3>Study</h3>
+            <p>Learn topics and practise concepts.</p>
+          </a>
+
+          <a class="feature-card" href="coding.html">
+            <span class="feature-icon">⌘</span>
+            <h3>Coding</h3>
+            <p>Write, understand and debug code.</p>
+          </a>
+
+          <a class="feature-card" href="files.html">
+            <span class="feature-icon">▱</span>
+            <h3>Files</h3>
+            <p>Access and organise your files.</p>
+          </a>
+
+          <a class="feature-card" href="memory.html">
+            <span class="feature-icon">◈</span>
+            <h3>Memory</h3>
+            <p>Manage information saved by your assistant.</p>
+          </a>
+
+          <a class="feature-card" href="settings.html">
+            <span class="feature-icon">⚙</span>
+            <h3>Settings</h3>
+            <p>Configure your MINI-AI experience.</p>
+          </a>
+
+        </div>
+      </section>
+
+      <footer class="dashboard-footer">
+        <p>MINI-AI · Intelligence Without Limits</p>
+        <small>Your data stays under your control.</small>
+      </footer>
+
+    </main>
+
+  </div>
+
+  <script>
+    const menuButton = document.getElementById("menu-button");
+    const sidebar = document.getElementById("sidebar");
+
+    menuButton.addEventListener("click", () => {
+      const isOpen = sidebar.classList.toggle("open");
+
+      menuButton.setAttribute(
+        "aria-expanded",
+        String(isOpen)
+      );
+    });
+  </script>
+
+</body>
+</html>
+
