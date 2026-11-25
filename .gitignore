@@ -1,0 +1,76 @@
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+secrets/
+*.pem
+*.key
+credentials.json
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+venv/
+.venv/
+env/
+.pytest_cache/
+.mypy_cache/
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+.pnpm-store/
+
+# Local databases
+*.db
+*.sqlite
+*.sqlite3
+database/local/
+
+# AI models and downloaded weights
+models/
+*.gguf
+*.bin
+*.safetensors
+*.onnx
+
+# Logs
+logs/
+*.log
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.swp
+*.bak
+
+# Operating system files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE settings
+.idea/
+.vscode/
+*.iml
+
+# Build outputs
+build/
+dist/
+out/
+coverage/
+
+# Android build files
+.gradle/
+.cxx/
+local.properties
+**/build/
+
+# Generated assets
+generated/
+
