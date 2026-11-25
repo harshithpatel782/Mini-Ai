@@ -1,0 +1,521 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0,
+          viewport-fit=cover">
+
+    <meta name="theme-color" content="#090b14">
+    <meta name="description"
+          content="MINI-AI - Your personal intelligent assistant.">
+
+    <title>MINI-AI | Intelligence Without Limits</title>
+
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="../assets/icons/icon.svg" type="image/svg+xml">
+
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style"
+          content="black-translucent">
+</head>
+
+<body>
+
+    <!-- SVG ICON LIBRARY -->
+    <svg xmlns="http://www.w3.org/2000/svg"
+         style="display:none">
+
+        <symbol id="icon-home" viewBox="0 0 24 24">
+            <path d="M3 10.5 12 3l9 7.5V21h-6v-6H9v6H3z"
+                  fill="none" stroke="currentColor"
+                  stroke-width="1.7" stroke-linejoin="round"/>
+        </symbol>
+
+        <symbol id="icon-chat" viewBox="0 0 24 24">
+            <path d="M4 5h16v12H9l-5 4z"
+                  fill="none" stroke="currentColor"
+                  stroke-width="1.7" stroke-linejoin="round"/>
+        </symbol>
+
+        <symbol id="icon-eye" viewBox="0 0 24 24">
+            <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"
+                  fill="none" stroke="currentColor"
+                  stroke-width="1.7"/>
+            <circle cx="12" cy="12" r="3"
+                    fill="none" stroke="currentColor"
+                    stroke-width="1.7"/>
+        </symbol>
+
+        <symbol id="icon-mic" viewBox="0 0 24 24">
+            <rect x="9" y="2" width="6" height="13"
+                  rx="3" fill="none" stroke="currentColor"
+                  stroke-width="1.7"/>
+            <path d="M5 11a7 7 0 0 0 14 0M12 18v4m-4 0h8"
+                  fill="none" stroke="currentColor"
+                  stroke-width="1.7" stroke-linecap="round"/>
+        </symbol>
+
+        <symbol id="icon-book" viewBox="0 0 24 24">
+            <path d="M3 4h7a2 2 0 0 1 2 2v15a2 2 0 0 0-2-2H3z
+                     M21 4h-7a2 2 0 0 0-2 2v15a2 2 0 0 1 2-2h7z"
+                  fill="none" stroke="currentColor"
+                  stroke-width="1.7" stroke-linejoin="round"/>
+        </symbol>
+
+        <symbol id="icon-code" viewBox="0 0 24 24">
+            <path d="m8 8-5 4 5 4m8-8 5 4-5 4m-2-12-4 16"
+                  fill="none" stroke="currentColor"
+                  stroke-width="1.7" stroke-linecap="round"/>
+        </symbol>
+
+        <symbol id="icon-folder" viewBox="0 0 24 24">
+            <path d="M3 5h7l2 3h9v12H3z"
+                  fill="none" stroke="currentColor"
+                  stroke-width="1.7" stroke-linejoin="round"/>
+        </symbol>
+
+        <symbol id="icon-brain" viewBox="0 0 24 24">
+            <path d="M12 4a4 4 0 0 0-7 3 4 4 0 0 0 0 7
+                     4 4 0 0 0 7 4m0-14a4 4 0 0 1 7 3
+                     4 4 0 0 1 0 7 4 4 0 0 1-7 4m0-14v18"
+                  fill="none" stroke="currentColor"
+                  stroke-width="1.6" stroke-linecap="round"/>
+        </symbol>
+
+        <symbol id="icon-settings" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="3"
+                    fill="none" stroke="currentColor"
+                    stroke-width="1.7"/>
+            <path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-1.7 2.9
+                     -.2-.1a1.7 1.7 0 0 0-1.8-.2 1.7 1.7 0 0 0-1
+                     1.5v.2H9v-.2a1.7 1.7 0 0 0-1-1.5
+                     1.7 1.7 0 0 0-1.8.2l-.2.1-1.7-2.9
+                     .1-.1A1.7 1.7 0 0 0 4.7 15
+                     1.7 1.7 0 0 0 3 14H2.8v-4H3
+                     a1.7 1.7 0 0 0 1.7-1
+                     1.7 1.7 0 0 0-.3-1.9l-.1-.1L6 4.1l.2.1
+                     a1.7 1.7 0 0 0 1.8.2 1.7 1.7 0 0 0 1-1.5
+                     v-.2h6v.2a1.7 1.7 0 0 0 1 1.5
+                     1.7 1.7 0 0 0 1.8-.2l.2-.1 1.7 2.9
+                     -.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.5 1H21v4h-.2
+                     a1.7 1.7 0 0 0-1.4 1Z"
+                  fill="none" stroke="currentColor"
+                  stroke-width="1.3" stroke-linejoin="round"/>
+        </symbol>
+
+        <symbol id="icon-send" viewBox="0 0 24 24">
+            <path d="m22 2-7 20-4-9-9-4zM22 2 11 13"
+                  fill="none" stroke="currentColor"
+                  stroke-width="1.7" stroke-linejoin="round"/>
+        </symbol>
+
+        <symbol id="icon-plus" viewBox="0 0 24 24">
+            <path d="M12 5v14M5 12h14"
+                  fill="none" stroke="currentColor"
+                  stroke-width="1.8" stroke-linecap="round"/>
+        </symbol>
+
+        <symbol id="icon-menu" viewBox="0 0 24 24">
+            <path d="M4 6h16M4 12h16M4 18h16"
+                  fill="none" stroke="currentColor"
+                  stroke-width="1.8" stroke-linecap="round"/>
+        </symbol>
+
+        <symbol id="icon-close" viewBox="0 0 24 24">
+            <path d="m6 6 12 12M18 6 6 18"
+                  fill="none" stroke="currentColor"
+                  stroke-width="1.8" stroke-linecap="round"/>
+        </symbol>
+
+    </svg>
+
+    <!-- APPLICATION -->
+    <div class="app-container">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar" id="sidebar">
+
+            <div class="brand">
+                <div class="brand-logo">
+                    <span class="brand-orb"></span>
+                </div>
+
+                <div class="brand-text">
+                    <h2>MINI<span>AI</span></h2>
+                    <small>INTELLIGENCE WITHOUT LIMITS</small>
+                </div>
+
+                <button class="icon-button mobile-close"
+                        id="closeSidebar"
+                        aria-label="Close navigation">
+                    <svg><use href="#icon-close"/></svg>
+                </button>
+            </div>
+
+            <div class="sidebar-content">
+
+                <button class="new-chat-button" id="newChat">
+                    <svg><use href="#icon-plus"/></svg>
+                    <span>New conversation</span>
+                </button>
+
+                <p class="nav-heading">WORKSPACE</p>
+
+                <nav class="main-navigation">
+
+                    <a href="#dashboard" class="nav-link active"
+                       data-page="dashboard">
+                        <svg><use href="#icon-home"/></svg>
+                        <span>Dashboard</span>
+                    </a>
+
+                    <a href="#chat" class="nav-link"
+                       data-page="chat">
+                        <svg><use href="#icon-chat"/></svg>
+                        <span>AI Chat</span>
+                    </a>
+
+                    <a href="#vision" class="nav-link"
+                       data-page="vision">
+                        <svg><use href="#icon-eye"/></svg>
+                        <span>Vision</span>
+                    </a>
+
+                    <a href="#voice" class="nav-link"
+                       data-page="voice">
+                        <svg><use href="#icon-mic"/></svg>
+                        <span>Voice Assistant</span>
+                    </a>
+
+                    <a href="#study" class="nav-link"
+                       data-page="study">
+                        <svg><use href="#icon-book"/></svg>
+                        <span>Study</span>
+                    </a>
+
+                    <a href="#coding" class="nav-link"
+                       data-page="coding">
+                        <svg><use href="#icon-code"/></svg>
+                        <span>Coding</span>
+                    </a>
+
+                    <a href="#files" class="nav-link"
+                       data-page="files">
+                        <svg><use href="#icon-folder"/></svg>
+                        <span>My Files</span>
+                    </a>
+
+                    <a href="#memory" class="nav-link"
+                       data-page="memory">
+                        <svg><use href="#icon-brain"/></svg>
+                        <span>Memory</span>
+                    </a>
+
+                </nav>
+
+                <div class="sidebar-bottom">
+
+                    <a href="#settings" class="nav-link"
+                       data-page="settings">
+                        <svg><use href="#icon-settings"/></svg>
+                        <span>Settings</span>
+                    </a>
+
+                    <div class="user-profile">
+                        <div class="user-avatar">M</div>
+
+                        <div class="user-details">
+                            <strong>MINI User</strong>
+                            <small>Personal Assistant</small>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+
+            <!-- TOP HEADER -->
+            <header class="top-header">
+
+                <div class="header-left">
+
+                    <button class="icon-button menu-button"
+                            id="openSidebar"
+                            aria-label="Open navigation">
+                        <svg><use href="#icon-menu"/></svg>
+                    </button>
+
+                    <div class="breadcrumb">
+                        <span>MINI-AI</span>
+                        <span>/</span>
+                        <strong id="currentPage">Dashboard</strong>
+                    </div>
+
+                </div>
+
+                <div class="header-right">
+
+                    <div class="system-status">
+                        <span class="status-dot"></span>
+                        <span id="systemStatus">Practice mode</span>
+                    </div>
+
+                    <button class="icon-button"
+                            id="headerSettings"
+                            aria-label="Settings">
+                        <svg><use href="#icon-settings"/></svg>
+                    </button>
+
+                </div>
+
+            </header>
+
+            <!-- DASHBOARD PAGE -->
+            <section class="page dashboard-page"
+                     id="dashboardPage"
+                     data-view="dashboard">
+
+                <div class="welcome-section">
+
+                    <p class="welcome-label">
+                        YOUR PERSONAL AI ASSISTANT
+                    </p>
+
+                    <h1>
+                        Intelligence without
+                        <span>limits.</span>
+                    </h1>
+
+                    <p class="welcome-description">
+                        Your ideas, questions and creativity.
+                        One intelligent space.
+                    </p>
+
+                </div>
+
+                <!-- AI ORB -->
+                <div class="ai-orb-section">
+
+                    <div class="orb-container" id="aiOrb">
+
+                        <div class="orb-glow"></div>
+
+                        <div class="orb-ring ring-one"></div>
+                        <div class="orb-ring ring-two"></div>
+
+                        <div class="ai-orb">
+                            <div class="orb-inner"></div>
+                            <div class="orb-core"></div>
+                        </div>
+
+                    </div>
+
+                    <p class="orb-title" id="orbTitle">
+                        MINI is ready
+                    </p>
+
+                    <p class="orb-description"
+                       id="orbDescription">
+                        Start a conversation with your assistant.
+                    </p>
+
+                </div>
+
+                <!-- QUICK ACTIONS -->
+                <div class="quick-actions">
+
+                    <button class="action-card"
+                            data-action="chat">
+                        <div class="action-icon">
+                            <svg><use href="#icon-chat"/></svg>
+                        </div>
+                        <strong>Ask anything</strong>
+                        <small>Get intelligent answers</small>
+                    </button>
+
+                    <button class="action-card"
+                            data-action="vision">
+                        <div class="action-icon">
+                            <svg><use href="#icon-eye"/></svg>
+                        </div>
+                        <strong>Analyze image</strong>
+                        <small>Understand your pictures</small>
+                    </button>
+
+                    <button class="action-card"
+                            data-action="voice">
+                        <div class="action-icon">
+                            <svg><use href="#icon-mic"/></svg>
+                        </div>
+                        <strong>Talk to MINI</strong>
+                        <small>Use your voice</small>
+                    </button>
+
+                    <button class="action-card"
+                            data-action="study">
+                        <div class="action-icon">
+                            <svg><use href="#icon-book"/></svg>
+                        </div>
+                        <strong>Learn something</strong>
+                        <small>Your personal study partner</small>
+                    </button>
+
+                </div>
+
+                <!-- CHAT INPUT -->
+                <div class="dashboard-chat">
+
+                    <form id="dashboardChatForm">
+
+                        <div class="chat-input-wrapper">
+
+                            <input
+                                type="text"
+                                id="dashboardMessage"
+                                placeholder="Ask MINI anything..."
+                                autocomplete="off"
+                                maxlength="10000"
+                                aria-label="Message MINI">
+
+                            <div class="chat-input-actions">
+
+                                <button type="button"
+                                        class="icon-button"
+                                        id="dashboardMic"
+                                        aria-label="Voice input">
+                                    <svg><use href="#icon-mic"/></svg>
+                                </button>
+
+                                <button type="submit"
+                                        class="send-button"
+                                        aria-label="Send message">
+                                    <svg><use href="#icon-send"/></svg>
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </form>
+
+                    <p class="input-disclaimer">
+                        MINI-AI is under development. AI features
+                        become available as modules are connected.
+                    </p>
+
+                </div>
+
+            </section>
+
+            <!-- CHAT PAGE -->
+            <section class="page chat-page"
+                     id="chatPage"
+                     data-view="chat"
+                     hidden>
+
+                <div class="chat-header">
+                    <h2>AI Conversation</h2>
+                    <p>Talk, ask questions and explore ideas.</p>
+                </div>
+
+                <div class="chat-messages"
+                     id="chatMessages"
+                     aria-live="polite">
+
+                    <div class="welcome-message">
+                        <div class="message-avatar">M</div>
+
+                        <div class="message-content">
+                            <strong>MINI</strong>
+                            <p>
+                                Hello! I'm MINI, your personal
+                                assistant. How can I help you?
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <form id="chatForm" class="chat-form">
+
+                    <input type="text"
+                           id="chatMessage"
+                           placeholder="Message MINI..."
+                           maxlength="10000"
+                           autocomplete="off"
+                           aria-label="Chat message">
+
+                    <button type="button"
+                            id="chatMic"
+                            class="icon-button"
+                            aria-label="Voice input">
+                        <svg><use href="#icon-mic"/></svg>
+                    </button>
+
+                    <button type="submit"
+                            class="send-button"
+                            aria-label="Send message">
+                        <svg><use href="#icon-send"/></svg>
+                    </button>
+
+                </form>
+
+            </section>
+
+            <!-- FUTURE MODULES -->
+            <section class="page module-page"
+                     id="modulePage"
+                     data-view="module"
+                     hidden>
+
+                <div class="module-content">
+                    <div class="module-icon" id="moduleIcon">
+                        <svg><use href="#icon-eye"/></svg>
+                    </div>
+
+                    <h2 id="moduleTitle">Module</h2>
+
+                    <p id="moduleDescription">
+                        This module is being prepared.
+                    </p>
+
+                    <span class="module-status">
+                        Development in progress
+                    </span>
+                </div>
+
+            </section>
+
+            <!-- FOOTER -->
+            <footer class="app-footer">
+                <span>MINI-AI</span>
+                <span>Built for independence.</span>
+            </footer>
+
+        </main>
+
+    </div>
+
+    <!-- JAVASCRIPT -->
+    <script src="js/navigation.js" defer></script>
+    <script src="js/app.js" defer></script>
+    <script src="js/chat.js" defer></script>
+    <script src="js/voice.js" defer></script>
+    <script src="js/vision.js" defer></script>
+    <script src="js/memory.js" defer></script>
+    <script src="js/settings.js" defer></script>
+
+</body>
+</html>
+

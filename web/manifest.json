@@ -1,0 +1,25 @@
+
+{
+  "id": "/",
+  "name": "MINI-AI",
+  "short_name": "MINI-AI",
+  "description": "Your personal AI assistant. Intelligence Without Limits.",
+  "lang": "en",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": [
+    "standalone",
+    "minimal-ui"
+  ],
+  "orientation": "portrait",
+  "background_color": "#090b14",
+  "theme_color": "#090b14",
+  "categories": [
+    "productivity",
+    "education",
+    "utilities"
+  ],
+  "prefer_related_applications": false
+}
+
